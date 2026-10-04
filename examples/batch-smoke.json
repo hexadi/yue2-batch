@@ -1,0 +1,21 @@
+{
+  "batch_id": "smoke-2",
+  "jobs": [
+    {
+      "id": "smoke-a",
+      "style": "English indie pop, warm male vocal, minimal piano, 90 BPM",
+      "lyrics": "[Verse]\nHello night\n[Chorus]\nStay bright",
+      "cot": "off",
+      "seed": 101,
+      "semantic_sampling": {"min_tokens": 64, "max_tokens": 256}
+    },
+    {
+      "id": "smoke-b",
+      "style": "Dream pop, airy female vocal, soft synths, 100 BPM",
+      "lyrics": "[Verse]\nSilver sky\n[Chorus]\nDrift with me",
+      "cot": "off",
+      "seed": 102,
+      "semantic_sampling": {"min_tokens": 64, "max_tokens": 256}
+    }
+  ]
+}
