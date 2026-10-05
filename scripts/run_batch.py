@@ -28,6 +28,7 @@ def main() -> int:
     parser.add_argument("--container-disk-gb", type=int, default=30)
     parser.add_argument("--timeout-minutes", type=int, default=60)
     parser.add_argument("--name", default="yue2-batch")
+    parser.add_argument("--registry-auth-id", default=None)
     parser.add_argument("--keep-pod", action="store_true")
     args = parser.parse_args()
 
@@ -49,7 +50,7 @@ def main() -> int:
     pod_id = None
     completed = False
     try:
-        raw = run(
+        create_args = [
             "pod", "create",
             "--image", args.image,
             "--gpu-id", args.gpu_id,
@@ -60,7 +61,10 @@ def main() -> int:
             "--name", args.name,
             "--ssh=false",
             "--env", json.dumps(env, separators=(",", ":")),
-        )
+        ]
+        if args.registry_auth_id:
+            create_args += ["--registry-auth-id", args.registry_auth_id]
+        raw = run(*create_args)
         pod = json.loads(raw)
         pod_id = pod["id"]
         print(json.dumps({"pod_id": pod_id, "status": "created"}), flush=True)
